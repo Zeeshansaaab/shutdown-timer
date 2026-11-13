@@ -11,8 +11,10 @@
 		293829E07FC32E7102B34D17 /* PlaceholderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029250DD4BC5A438D9559C7D /* PlaceholderTests.swift */; };
 		33025FEC071BED4ECB54F827 /* FakePowerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F8E45E8CD68F9FA526C3C /* FakePowerActions.swift */; };
 		360C3070480F4263CDF03AD3 /* TimerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C52D9802BA41537BEA8F56 /* TimerEngine.swift */; };
+		4F6F09C47A72C274D284B11B /* DailyScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0AE4207477354AB93BC323 /* DailyScheduleTests.swift */; };
 		6EA3A0309A63596CA429D9E1 /* ShutdownTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */; };
 		8145A29BEDDCA58213B3F6E0 /* PowerActionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D4B0BAC32DB5F33B27330D /* PowerActionsTests.swift */; };
+		C0AC608CCD3F34CBD82711AB /* DailySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479E8A8238822333EC9DECF /* DailySchedule.swift */; };
 		CBA55798138E343EC2A0ABE8 /* FakeTimerNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */; };
 		E1F65178BF20A359486B5505 /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */; };
 /* End PBXBuildFile section */
@@ -34,11 +36,13 @@
 		58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
 		71C52D9802BA41537BEA8F56 /* TimerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngine.swift; sourceTree = "<group>"; };
 		7424D25BB87700262AB3EB63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8479E8A8238822333EC9DECF /* DailySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySchedule.swift; sourceTree = "<group>"; };
 		B5B444BF8F3483781BB8726F /* ShutdownTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShutdownTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D4B0BAC32DB5F33B27330D /* PowerActionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerActionsTests.swift; sourceTree = "<group>"; };
 		D66E606671BCFB9BD55EEB93 /* PowerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerActions.swift; sourceTree = "<group>"; };
 		D9A0F735E04696524560442B /* ShutdownTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShutdownTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutdownTimerApp.swift; sourceTree = "<group>"; };
+		EF0AE4207477354AB93BC323 /* DailyScheduleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyScheduleTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -54,6 +58,7 @@
 		39DE8ED2B63675217D8CB0DF /* ShutdownTimerTests */ = {
 			isa = PBXGroup;
 			children = (
+				EF0AE4207477354AB93BC323 /* DailyScheduleTests.swift */,
 				458F8E45E8CD68F9FA526C3C /* FakePowerActions.swift */,
 				3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */,
 				029250DD4BC5A438D9559C7D /* PlaceholderTests.swift */,
@@ -66,6 +71,7 @@
 		7F30EF2DAE965718E0C337E5 /* ShutdownTimer */ = {
 			isa = PBXGroup;
 			children = (
+				8479E8A8238822333EC9DECF /* DailySchedule.swift */,
 				7424D25BB87700262AB3EB63 /* Info.plist */,
 				D66E606671BCFB9BD55EEB93 /* PowerActions.swift */,
 				E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */,
@@ -157,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F6F09C47A72C274D284B11B /* DailyScheduleTests.swift in Sources */,
 				33025FEC071BED4ECB54F827 /* FakePowerActions.swift in Sources */,
 				CBA55798138E343EC2A0ABE8 /* FakeTimerNotifying.swift in Sources */,
 				293829E07FC32E7102B34D17 /* PlaceholderTests.swift in Sources */,
@@ -169,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0AC608CCD3F34CBD82711AB /* DailySchedule.swift in Sources */,
 				1897F38BD77C5A4A715FD5AB /* PowerActions.swift in Sources */,
 				6EA3A0309A63596CA429D9E1 /* ShutdownTimerApp.swift in Sources */,
 				360C3070480F4263CDF03AD3 /* TimerEngine.swift in Sources */,

@@ -101,3 +101,10 @@ final class TimerEngine: ObservableObject {
         }
     }
 }
+
+extension TimerEngine {
+    func startDaily(action: PowerAction, hour: Int, minute: Int) {
+        let fireDate = DailySchedule.nextFireDate(hour: hour, minute: minute, after: clock())
+        startAt(action: action, fireDate: fireDate, isDaily: true)
+    }
+}
