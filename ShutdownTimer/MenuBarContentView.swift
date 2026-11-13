@@ -1,0 +1,63 @@
+import SwiftUI
+
+struct MenuBarContentView: View {
+    @ObservedObject var engine: TimerEngine
+    @ObservedObject var settingsStore: SettingsViewModel
+
+    private let presets = [15, 30, 60, 90]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Picker("Action", selection: $settingsStore.action) {
+                ForEach(PowerAction.allCases) { action in
+                    Text(action.displayName).tag(action)
+                }
+            }
+            .pickerStyle(.segmented)
+
+            HStack {
+                ForEach(presets, id: \.self) { minutes in
+                    Button("\(minutes)m") {
+                        settingsStore.durationMinutes = minutes
+                    }
+                }
+                Stepper("\(settingsStore.durationMinutes) min", value: $settingsStore.durationMinutes, in: 1...1440)
+            }
+
+            startCancelButton
+
+            Divider()
+
+            Toggle("Enable daily schedule", isOn: $settingsStore.dailyEnabled)
+            if settingsStore.dailyEnabled {
+                DatePicker("Daily time", selection: $settingsStore.dailyTime, displayedComponents: .hourAndMinute)
+            }
+
+            Divider()
+
+            Toggle("Launch at Login", isOn: $settingsStore.launchAtLogin)
+
+            Divider()
+
+            Button("Quit") {
+                NSApplication.shared.terminate(nil)
+            }
+        }
+        .padding()
+        .frame(width: 260)
+    }
+
+    @ViewBuilder
+    private var startCancelButton: some View {
+        switch engine.state {
+        case .idle:
+            Button("Start") {
+                settingsStore.startTimer(using: engine)
+            }
+        case .running(let action, let fireDate, _), .warningShown(let action, let fireDate, _):
+            Button("Cancel (\(action.displayName) at \(fireDate.formatted(date: .omitted, time: .shortened)))") {
+                engine.cancel()
+            }
+        }
+    }
+}
