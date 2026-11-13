@@ -56,6 +56,12 @@ private struct MenuBarLabel: View {
 
     private func countdownText(until fireDate: Date) -> String {
         let remaining = max(0, Int(fireDate.timeIntervalSince(now)))
-        return String(format: "%02d:%02d", remaining / 60, remaining % 60)
+        let hours = remaining / 3600
+        let minutes = (remaining % 3600) / 60
+        let seconds = remaining % 60
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        }
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }

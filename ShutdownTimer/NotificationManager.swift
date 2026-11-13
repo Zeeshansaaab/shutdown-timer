@@ -65,4 +65,12 @@ final class NotificationManager: NSObject, TimerNotifying, UNUserNotificationCen
         }
         completionHandler()
     }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound])
+    }
 }
