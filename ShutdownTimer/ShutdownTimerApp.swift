@@ -37,7 +37,10 @@ private struct MenuBarLabel: View {
     @ObservedObject var engine: TimerEngine
     @State private var now = Date()
 
-    private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    // Display-only: TimerEngine owns its own timer and drives `tick()` itself,
+    // so this is purely redrawing the countdown text every second — it has no
+    // bearing on whether the engine actually fires.
+    private let redrawTicker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         Group {
@@ -48,9 +51,8 @@ private struct MenuBarLabel: View {
                 Text(countdownText(until: fireDate))
             }
         }
-        .onReceive(ticker) { tick in
+        .onReceive(redrawTicker) { tick in
             now = tick
-            engine.tick()
         }
     }
 

@@ -31,6 +31,14 @@ final class TimerEngine: ObservableObject {
     /// callback's own state write silently stomped by the outer assignment.
     var onBecameIdle: (() -> Void)?
 
+    // Owned here (not by the SwiftUI view that displays the countdown) so ticking
+    // survives view re-renders and isn't silently dropped if the menu is never
+    // opened. `beginActivity` discourages App Nap from throttling/coalescing the
+    // 1s timer while something is armed, which could otherwise delay the fire
+    // past its warning window.
+    private var repeatingTimer: Timer?
+    private var activityToken: NSObjectProtocol?
+
     init(
         powerActions: PowerActionsExecuting,
         notifier: TimerNotifying,
@@ -50,12 +58,33 @@ final class TimerEngine: ObservableObject {
     func startAt(action: PowerAction, fireDate: Date, isDaily: Bool) {
         warningPosted = false
         state = .running(action: action, fireDate: fireDate, isDaily: isDaily)
+        scheduleTicking()
     }
 
     func cancel() {
         warningPosted = false
         state = .idle
+        stopTicking()
         onBecameIdle?()
+    }
+
+    private func scheduleTicking() {
+        stopTicking()
+        activityToken = ProcessInfo.processInfo.beginActivity(options: [.userInitiated], reason: "Shutdown Timer armed")
+        let timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
+            self?.tick()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        repeatingTimer = timer
+    }
+
+    private func stopTicking() {
+        repeatingTimer?.invalidate()
+        repeatingTimer = nil
+        if let activityToken {
+            ProcessInfo.processInfo.endActivity(activityToken)
+        }
+        activityToken = nil
     }
 
     func snooze(by interval: TimeInterval = 10 * 60) {
@@ -103,6 +132,7 @@ final class TimerEngine: ObservableObject {
                 state = .running(action: action, fireDate: nextDailyFireDate(after: now, basedOn: fireDate), isDaily: true)
             } else {
                 state = .idle
+                stopTicking()
                 onBecameIdle?()
             }
             return
@@ -116,6 +146,7 @@ final class TimerEngine: ObservableObject {
                 state = .running(action: action, fireDate: nextDailyFireDate(after: clock(), basedOn: fireDate), isDaily: true)
             } else {
                 state = .idle
+                stopTicking()
                 onBecameIdle?()
             }
             return
@@ -125,6 +156,7 @@ final class TimerEngine: ObservableObject {
             state = .running(action: action, fireDate: nextDailyFireDate(after: clock(), basedOn: fireDate), isDaily: true)
         } else {
             state = .idle
+            stopTicking()
             onBecameIdle?()
         }
     }
