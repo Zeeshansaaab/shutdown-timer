@@ -10,8 +10,11 @@
 		1897F38BD77C5A4A715FD5AB /* PowerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66E606671BCFB9BD55EEB93 /* PowerActions.swift */; };
 		293829E07FC32E7102B34D17 /* PlaceholderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029250DD4BC5A438D9559C7D /* PlaceholderTests.swift */; };
 		33025FEC071BED4ECB54F827 /* FakePowerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458F8E45E8CD68F9FA526C3C /* FakePowerActions.swift */; };
+		360C3070480F4263CDF03AD3 /* TimerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C52D9802BA41537BEA8F56 /* TimerEngine.swift */; };
 		6EA3A0309A63596CA429D9E1 /* ShutdownTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */; };
 		8145A29BEDDCA58213B3F6E0 /* PowerActionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D4B0BAC32DB5F33B27330D /* PowerActionsTests.swift */; };
+		CBA55798138E343EC2A0ABE8 /* FakeTimerNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */; };
+		E1F65178BF20A359486B5505 /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +29,10 @@
 
 /* Begin PBXFileReference section */
 		029250DD4BC5A438D9559C7D /* PlaceholderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTests.swift; sourceTree = "<group>"; };
+		3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTimerNotifying.swift; sourceTree = "<group>"; };
 		458F8E45E8CD68F9FA526C3C /* FakePowerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePowerActions.swift; sourceTree = "<group>"; };
+		58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
+		71C52D9802BA41537BEA8F56 /* TimerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngine.swift; sourceTree = "<group>"; };
 		7424D25BB87700262AB3EB63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B5B444BF8F3483781BB8726F /* ShutdownTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShutdownTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D4B0BAC32DB5F33B27330D /* PowerActionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerActionsTests.swift; sourceTree = "<group>"; };
@@ -49,8 +55,10 @@
 			isa = PBXGroup;
 			children = (
 				458F8E45E8CD68F9FA526C3C /* FakePowerActions.swift */,
+				3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */,
 				029250DD4BC5A438D9559C7D /* PlaceholderTests.swift */,
 				C7D4B0BAC32DB5F33B27330D /* PowerActionsTests.swift */,
+				58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */,
 			);
 			path = ShutdownTimerTests;
 			sourceTree = "<group>";
@@ -61,6 +69,7 @@
 				7424D25BB87700262AB3EB63 /* Info.plist */,
 				D66E606671BCFB9BD55EEB93 /* PowerActions.swift */,
 				E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */,
+				71C52D9802BA41537BEA8F56 /* TimerEngine.swift */,
 			);
 			path = ShutdownTimer;
 			sourceTree = "<group>";
@@ -149,8 +158,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				33025FEC071BED4ECB54F827 /* FakePowerActions.swift in Sources */,
+				CBA55798138E343EC2A0ABE8 /* FakeTimerNotifying.swift in Sources */,
 				293829E07FC32E7102B34D17 /* PlaceholderTests.swift in Sources */,
 				8145A29BEDDCA58213B3F6E0 /* PowerActionsTests.swift in Sources */,
+				E1F65178BF20A359486B5505 /* TimerEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +171,7 @@
 			files = (
 				1897F38BD77C5A4A715FD5AB /* PowerActions.swift in Sources */,
 				6EA3A0309A63596CA429D9E1 /* ShutdownTimerApp.swift in Sources */,
+				360C3070480F4263CDF03AD3 /* TimerEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
