@@ -23,12 +23,3 @@ System Settings → Privacy & Security → Automation.
     xcodebuild test -project ShutdownTimer.xcodeproj -scheme ShutdownTimer \
       -destination 'platform=macOS' -derivedDataPath build
 
-## Push to GitHub and cut a release (builds+attaches a DMG automatically)
-
-    git remote add origin <your-repo-url>
-    git push -u origin main
-
-Then, on github.com: **Releases → Draft a new release**, pick a tag, and
-click **Publish release**. The `release.yml` workflow builds a universal
-`ShutdownTimer.dmg` and attaches it to that release automatically — no
-local `gh` CLI needed.
