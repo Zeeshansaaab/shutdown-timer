@@ -24,6 +24,13 @@ final class TimerEngine: ObservableObject {
     let clock: () -> Date
     private var warningPosted = false
 
+    /// Called after `state` has fully settled to `.idle` (never while a daily
+    /// schedule reschedules itself). Called synchronously, after the `state`
+    /// assignment has completed — never from within a Combine subscriber to
+    /// `$state`, which would reenter the property's willSet and have this
+    /// callback's own state write silently stomped by the outer assignment.
+    var onBecameIdle: (() -> Void)?
+
     init(
         powerActions: PowerActionsExecuting,
         notifier: TimerNotifying,
@@ -48,6 +55,7 @@ final class TimerEngine: ObservableObject {
     func cancel() {
         warningPosted = false
         state = .idle
+        onBecameIdle?()
     }
 
     func snooze(by interval: TimeInterval = 10 * 60) {
@@ -95,6 +103,7 @@ final class TimerEngine: ObservableObject {
                 state = .running(action: action, fireDate: nextDailyFireDate(after: now, basedOn: fireDate), isDaily: true)
             } else {
                 state = .idle
+                onBecameIdle?()
             }
             return
         }
@@ -107,6 +116,7 @@ final class TimerEngine: ObservableObject {
                 state = .running(action: action, fireDate: nextDailyFireDate(after: clock(), basedOn: fireDate), isDaily: true)
             } else {
                 state = .idle
+                onBecameIdle?()
             }
             return
         }
@@ -115,6 +125,7 @@ final class TimerEngine: ObservableObject {
             state = .running(action: action, fireDate: nextDailyFireDate(after: clock(), basedOn: fireDate), isDaily: true)
         } else {
             state = .idle
+            onBecameIdle?()
         }
     }
 

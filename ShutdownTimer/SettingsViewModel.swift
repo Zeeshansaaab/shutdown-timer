@@ -2,21 +2,29 @@ import Foundation
 import Combine
 
 final class SettingsViewModel: ObservableObject {
-    @Published var action: PowerAction
+    @Published var action: PowerAction {
+        didSet {
+            persist()
+            if dailyEnabled { armDailySchedule() }
+        }
+    }
     @Published var durationMinutes: Int
     @Published var dailyEnabled: Bool {
         didSet { handleDailyToggle() }
     }
-    @Published var dailyTime: Date
-    @Published var launchAtLogin: Bool {
-        didSet { loginItemManager.setEnabled(launchAtLogin) }
+    @Published var dailyTime: Date {
+        didSet {
+            persist()
+            if dailyEnabled { armDailySchedule() }
+        }
     }
+    @Published private(set) var launchAtLogin: Bool
 
     private let store: PersistenceStore
-    private let loginItemManager: LoginItemManager
+    private let loginItemManager: LoginItemManaging
     private weak var engine: TimerEngine?
 
-    init(store: PersistenceStore, loginItemManager: LoginItemManager) {
+    init(store: PersistenceStore, loginItemManager: LoginItemManaging) {
         self.store = store
         self.loginItemManager = loginItemManager
 
@@ -24,7 +32,9 @@ final class SettingsViewModel: ObservableObject {
         action = settings.action
         durationMinutes = settings.durationMinutes
         dailyEnabled = settings.dailyEnabled
-        launchAtLogin = settings.launchAtLogin
+        // The login item's real registration status is the source of truth —
+        // not the mirrored UserDefaults value, which can drift from it.
+        launchAtLogin = loginItemManager.isEnabled
 
         var components = DateComponents()
         components.hour = settings.dailyHour
@@ -34,6 +44,16 @@ final class SettingsViewModel: ObservableObject {
 
     func attach(engine: TimerEngine) {
         self.engine = engine
+        // Independent of the one-off countdown: whenever the engine returns to
+        // idle (a one-off finished/was cancelled) and the daily schedule is
+        // enabled, re-arm it so it's never silently orphaned. Called after
+        // `state` has already settled to `.idle` — never during `@Published`'s
+        // own willSet — so the re-arm's own state write isn't stomped by the
+        // transition that triggered it.
+        engine.onBecameIdle = { [weak self] in
+            guard let self, self.dailyEnabled else { return }
+            self.armDailySchedule()
+        }
         if dailyEnabled {
             armDailySchedule()
         }
@@ -44,11 +64,17 @@ final class SettingsViewModel: ObservableObject {
         engine.start(action: action, duration: TimeInterval(durationMinutes * 60))
     }
 
+    func setLaunchAtLogin(_ enabled: Bool) {
+        let succeeded = loginItemManager.setEnabled(enabled)
+        launchAtLogin = succeeded ? enabled : loginItemManager.isEnabled
+        persist()
+    }
+
     private func handleDailyToggle() {
         persist()
         if dailyEnabled {
             armDailySchedule()
-        } else if let engine, case .running(_, _, true) = engine.state {
+        } else if let engine, engine.state.isDaily {
             engine.cancel()
         }
     }

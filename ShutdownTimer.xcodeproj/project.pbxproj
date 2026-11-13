@@ -16,12 +16,14 @@
 		4A9558752EF56CC7CDF41DCD /* PersistenceStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271C1F1974CD7015402A757D /* PersistenceStoreTests.swift */; };
 		4F6F09C47A72C274D284B11B /* DailyScheduleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0AE4207477354AB93BC323 /* DailyScheduleTests.swift */; };
 		53A2C19E904CF27B75F6C9CB /* LoginItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA0DD804E96B2257778417 /* LoginItemManager.swift */; };
+		6190DE3A793B3C9491739462 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1215D911240366575ED0AD08 /* SettingsViewModelTests.swift */; };
 		6EA3A0309A63596CA429D9E1 /* ShutdownTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */; };
 		8145A29BEDDCA58213B3F6E0 /* PowerActionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D4B0BAC32DB5F33B27330D /* PowerActionsTests.swift */; };
 		B97BC2332AF53D2FB8E4A421 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDC71F1C2819DDF9256D829 /* MenuBarContentView.swift */; };
 		C0AC608CCD3F34CBD82711AB /* DailySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479E8A8238822333EC9DECF /* DailySchedule.swift */; };
 		CBA55798138E343EC2A0ABE8 /* FakeTimerNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */; };
 		D78A00452F31F7698F0011F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94330CBD9578F544C3DB21D0 /* Assets.xcassets */; };
+		DE1864D03275551389CC4EC9 /* FakeLoginItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A9699380FF2FAB42731EDA /* FakeLoginItemManager.swift */; };
 		E1F65178BF20A359486B5505 /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */; };
 		EE958C87DA0508186DE558D2 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6410D729D5BF16EF0CEEBAB /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
@@ -39,10 +41,12 @@
 /* Begin PBXFileReference section */
 		029250DD4BC5A438D9559C7D /* PlaceholderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTests.swift; sourceTree = "<group>"; };
 		0332C5ADAA9831FF0B2623FD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		1215D911240366575ED0AD08 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		271C1F1974CD7015402A757D /* PersistenceStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStoreTests.swift; sourceTree = "<group>"; };
 		3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTimerNotifying.swift; sourceTree = "<group>"; };
 		458F8E45E8CD68F9FA526C3C /* FakePowerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakePowerActions.swift; sourceTree = "<group>"; };
 		4DA75D84745602904437000E /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
+		54A9699380FF2FAB42731EDA /* FakeLoginItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeLoginItemManager.swift; sourceTree = "<group>"; };
 		58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngineTests.swift; sourceTree = "<group>"; };
 		71C52D9802BA41537BEA8F56 /* TimerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerEngine.swift; sourceTree = "<group>"; };
 		7424D25BB87700262AB3EB63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -73,11 +77,13 @@
 			isa = PBXGroup;
 			children = (
 				EF0AE4207477354AB93BC323 /* DailyScheduleTests.swift */,
+				54A9699380FF2FAB42731EDA /* FakeLoginItemManager.swift */,
 				458F8E45E8CD68F9FA526C3C /* FakePowerActions.swift */,
 				3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */,
 				271C1F1974CD7015402A757D /* PersistenceStoreTests.swift */,
 				029250DD4BC5A438D9559C7D /* PlaceholderTests.swift */,
 				C7D4B0BAC32DB5F33B27330D /* PowerActionsTests.swift */,
+				1215D911240366575ED0AD08 /* SettingsViewModelTests.swift */,
 				58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */,
 			);
 			path = ShutdownTimerTests;
@@ -197,11 +203,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F6F09C47A72C274D284B11B /* DailyScheduleTests.swift in Sources */,
+				DE1864D03275551389CC4EC9 /* FakeLoginItemManager.swift in Sources */,
 				33025FEC071BED4ECB54F827 /* FakePowerActions.swift in Sources */,
 				CBA55798138E343EC2A0ABE8 /* FakeTimerNotifying.swift in Sources */,
 				4A9558752EF56CC7CDF41DCD /* PersistenceStoreTests.swift in Sources */,
 				293829E07FC32E7102B34D17 /* PlaceholderTests.swift in Sources */,
 				8145A29BEDDCA58213B3F6E0 /* PowerActionsTests.swift in Sources */,
+				6190DE3A793B3C9491739462 /* SettingsViewModelTests.swift in Sources */,
 				E1F65178BF20A359486B5505 /* TimerEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

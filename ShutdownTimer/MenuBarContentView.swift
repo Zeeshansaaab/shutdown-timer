@@ -38,7 +38,13 @@ struct MenuBarContentView: View {
 
             Divider()
 
-            Toggle("Launch at Login", isOn: $settingsStore.launchAtLogin)
+            Toggle(
+                "Launch at Login",
+                isOn: Binding(
+                    get: { settingsStore.launchAtLogin },
+                    set: { settingsStore.setLaunchAtLogin($0) }
+                )
+            )
 
             Divider()
 
