@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-dmg:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build universal app
+        run: |
+          xcodebuild -project ShutdownTimer.xcodeproj \
+            -scheme ShutdownTimer \
+            -configuration Release \
+            -derivedDataPath build \
+            build
+
+      - name: Ad-hoc codesign
+        run: |
+          codesign --force --deep --sign - "build/Build/Products/Release/ShutdownTimer.app"
+
+      - name: Verify universal binary
+        run: |
+          lipo -info "build/Build/Products/Release/ShutdownTimer.app/Contents/MacOS/ShutdownTimer"
+
+      - name: Create DMG
+        run: |
+          mkdir -p dmg-staging
+          cp -R "build/Build/Products/Release/ShutdownTimer.app" dmg-staging/
+          hdiutil create -volname "Shutdown Timer" -srcfolder dmg-staging -ov -format UDZO ShutdownTimer.dmg
+
+      - name: Upload DMG to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ShutdownTimer.dmg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
