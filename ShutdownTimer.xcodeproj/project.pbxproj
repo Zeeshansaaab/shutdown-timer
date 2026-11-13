@@ -20,6 +20,7 @@
 		C0AC608CCD3F34CBD82711AB /* DailySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479E8A8238822333EC9DECF /* DailySchedule.swift */; };
 		CBA55798138E343EC2A0ABE8 /* FakeTimerNotifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3911BEBC86214E70EF854788 /* FakeTimerNotifying.swift */; };
 		E1F65178BF20A359486B5505 /* TimerEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C6F3A867D97D4211618FEA /* TimerEngineTests.swift */; };
+		EE958C87DA0508186DE558D2 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6410D729D5BF16EF0CEEBAB /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D9A0F735E04696524560442B /* ShutdownTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShutdownTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutdownTimerApp.swift; sourceTree = "<group>"; };
 		EF0AE4207477354AB93BC323 /* DailyScheduleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyScheduleTests.swift; sourceTree = "<group>"; };
+		F6410D729D5BF16EF0CEEBAB /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -81,6 +83,7 @@
 				8479E8A8238822333EC9DECF /* DailySchedule.swift */,
 				7424D25BB87700262AB3EB63 /* Info.plist */,
 				CEEA0DD804E96B2257778417 /* LoginItemManager.swift */,
+				F6410D729D5BF16EF0CEEBAB /* NotificationManager.swift */,
 				4DA75D84745602904437000E /* PersistenceStore.swift */,
 				D66E606671BCFB9BD55EEB93 /* PowerActions.swift */,
 				E91234B5CC6F3D5BB07F09C8 /* ShutdownTimerApp.swift */,
@@ -188,6 +191,7 @@
 			files = (
 				C0AC608CCD3F34CBD82711AB /* DailySchedule.swift in Sources */,
 				53A2C19E904CF27B75F6C9CB /* LoginItemManager.swift in Sources */,
+				EE958C87DA0508186DE558D2 /* NotificationManager.swift in Sources */,
 				3FE0CBA8A066EA55E4F9EB16 /* PersistenceStore.swift in Sources */,
 				1897F38BD77C5A4A715FD5AB /* PowerActions.swift in Sources */,
 				6EA3A0309A63596CA429D9E1 /* ShutdownTimerApp.swift in Sources */,
