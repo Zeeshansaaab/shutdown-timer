@@ -17,6 +17,7 @@ final class TimerEngine: ObservableObject {
     static let warningLeadTime: TimeInterval = 60
     static let minimumDuration: TimeInterval = 60
     static let maximumDuration: TimeInterval = 24 * 60 * 60
+    static let missedFireGrace: TimeInterval = 5 * 60
 
     private let powerActions: PowerActionsExecuting
     private let notifier: TimerNotifying
@@ -81,23 +82,55 @@ final class TimerEngine: ObservableObject {
     }
 
     private func fire(action: PowerAction, fireDate: Date, isDaily: Bool) {
+        let now = clock()
+        warningPosted = false
+
+        // A wildly overdue fire (the Mac was asleep/suspended through the scheduled
+        // time, not just ticking a few seconds late) must not execute the stale
+        // action, and a daily schedule must reschedule from `now`, not from the
+        // stale `fireDate` — rescheduling from `fireDate` would land in the past
+        // again and re-fire on the very next tick, once per missed day.
+        guard now.timeIntervalSince(fireDate) <= Self.missedFireGrace else {
+            if isDaily {
+                state = .running(action: action, fireDate: nextDailyFireDate(after: now, basedOn: fireDate), isDaily: true)
+            } else {
+                state = .idle
+            }
+            return
+        }
+
         do {
             try powerActions.perform(action)
         } catch {
             notifier.postPermissionError(for: action)
-            warningPosted = false
-            state = .idle
+            if isDaily {
+                state = .running(action: action, fireDate: nextDailyFireDate(after: clock(), basedOn: fireDate), isDaily: true)
+            } else {
+                state = .idle
+            }
             return
         }
 
         if isDaily {
-            let nextFireDate = Calendar.current.date(byAdding: .day, value: 1, to: fireDate)
-                ?? fireDate.addingTimeInterval(24 * 60 * 60)
-            warningPosted = false
-            state = .running(action: action, fireDate: nextFireDate, isDaily: true)
+            state = .running(action: action, fireDate: nextDailyFireDate(after: clock(), basedOn: fireDate), isDaily: true)
         } else {
-            warningPosted = false
             state = .idle
+        }
+    }
+
+    private func nextDailyFireDate(after now: Date, basedOn fireDate: Date) -> Date {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: fireDate)
+        return DailySchedule.nextFireDate(hour: components.hour ?? 0, minute: components.minute ?? 0, after: now)
+    }
+}
+
+extension TimerState {
+    var isDaily: Bool {
+        switch self {
+        case .idle:
+            return false
+        case .running(_, _, let isDaily), .warningShown(_, _, let isDaily):
+            return isDaily
         }
     }
 }
