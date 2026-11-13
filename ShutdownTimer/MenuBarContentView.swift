@@ -15,13 +15,16 @@ struct MenuBarContentView: View {
             }
             .pickerStyle(.segmented)
 
-            HStack {
+            HStack(spacing: 6) {
                 ForEach(presets, id: \.self) { minutes in
                     Button("\(minutes)m") {
                         settingsStore.durationMinutes = minutes
                     }
+                    .buttonStyle(.bordered)
+                    .tint(settingsStore.durationMinutes == minutes ? Color.accentColor : Color.secondary)
                 }
-                Stepper("\(settingsStore.durationMinutes) min", value: $settingsStore.durationMinutes, in: 1...1440)
+                Stepper("\(settingsStore.durationMinutes)m", value: $settingsStore.durationMinutes, in: 1...1440)
+                    .fixedSize()
             }
 
             startCancelButton
@@ -44,7 +47,7 @@ struct MenuBarContentView: View {
             }
         }
         .padding()
-        .frame(width: 260)
+        .frame(width: 320)
     }
 
     @ViewBuilder
